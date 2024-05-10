@@ -4,7 +4,7 @@ import { TASKS } from '../constants/constants'
 import { Task } from '../models/task';
 import { TaskGroup } from '../models/taskgroup';
 import { Subject } from 'rxjs';
-import { Firestore, Unsubscribe, addDoc, collection, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, Unsubscribe, addDoc, collection, deleteDoc, doc, onSnapshot, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +24,23 @@ export class TaskService {
     // console.log("Document written with ID: ", docRef.id);
   }
 
+  public async updateTask(updatedTask: Task): Promise<void> {
+    const docRef = doc(this.firestore, `tasks/${updatedTask.id}`);
+    await setDoc(docRef, updatedTask);
+  }
+
+  public async deleteTask(taskToDelete: Task): Promise<void> {
+    const docRef = doc(this.firestore, `tasks/${taskToDelete.id}`);
+    await deleteDoc(docRef);
+  }
+
   private getTasksObservable(): void {
     this.taskGroupsListenerUnsub = onSnapshot(collection(this.firestore, 'tasks'), (result) => {
-      const taskGroups: Task[] = result.docs.map(task => task.data() as Task);
+      const taskGroups: Task[] = result.docs.map(taskData => {
+        const task: Task = taskData.data() as Task;
+        task.id = taskData.id;
+        return task;
+      });
       this.taskGroups$.next(this.getCategorizedTasks(taskGroups));
     });
   }
