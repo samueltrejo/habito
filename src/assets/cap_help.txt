@@ -1,0 +1,14 @@
+npm i @capacitor/core
+npm i @capacitor/cli --save-dev
+
+npx cap init /**this will add capacitor.config**/
+ng build
+/**set dir to dist/projectname in capcitor.config**/
+
+npm install @capacitor/ios @capacitor/android
+
+npx cap add ios
+npx cap add android
+
+npx cap open ios
+npx cap open android
