@@ -6,25 +6,17 @@ import { TaskService } from 'src/app/services/task.service';
 @Component({
   selector: 'app-landing',
   template: `
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-3">
-          <h2>Category</h2>
-          <div class="list-group" id="list-tab" role="tablist">
-            <app-taskcategory *ngFor="let taskGroup of taskGroups" [taskGroup]="taskGroup" (click)="setCategory(taskGroup.category)"></app-taskcategory>
-          </div>
-        </div>
-        <div class="col-9">
-          <div><span style="font-size: 2rem; font-weight: 500;">Tasks</span> <app-taskform></app-taskform></div>
-          <div class="tab-content" id="nav-tabContent">
-            <app-taskgroup *ngFor="let taskGroup of taskGroups" [taskGroup]="taskGroup" class="tab-pane fade{{isShown(taskGroup.category)}}" id="{{taskGroup.category}}" role="tabpanel" aria-labelledby="list-home-list"></app-taskgroup>
-          </div>
+    <div class="d-flex flex-wrap justify-content-center mt-5">
+      <div *ngFor="let taskGroup of taskGroups" class="card m-3" style="width: 18rem;">
+        <div class="card-body">
+          <!-- <h5 class="card-title"></h5> -->
+          <h6 class="card-subtitle mb-2 text-body-secondary">{{taskGroup.category}}</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
         </div>
       </div>
-
     </div>
-
-    <!-- taskform modal -->
   `,
   styleUrls: ['./landing.component.scss']
 })
@@ -33,27 +25,13 @@ export class LandingComponent {
   taskService: TaskService = inject(TaskService);
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
-  category: string;
+  // category: string;
 
   ngOnInit() {
-    this.category = this.activatedRoute.snapshot.params['category'];
+    // this.category = this.activatedRoute.snapshot.params['category'];
     this.taskService.taskGroups$.subscribe(data => {
       this.taskGroups = data;
     });
 
-  }
-
-  ngOnDestroy() {
-    this.taskService.taskGroups$.unsubscribe();
-  }
-
-  setCategory(taskcategory: string): void {
-    this.category = taskcategory;
-    this.router.navigate(['/' + taskcategory]);
-  }
-
-  isShown(taskCategory: string): string {
-    if (this.category == taskCategory) return " active show";
-    else return ""
   }
 }

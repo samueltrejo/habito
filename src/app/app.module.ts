@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { TaskformComponent } from './components/taskform/taskform.component';
+import { TaskhomeComponent } from './components/taskhome/taskhome.component';
 const firebaseConfig = {
   apiKey: "AIzaSyACgyBP2ZjnEPYZDXmPQmCCTTjPkJLSq7o",
   authDomain: "majestad-df1a6.firebaseapp.com",
@@ -30,7 +31,8 @@ const firebaseConfig = {
     TaskgroupComponent,
     TaskComponent,
     TaskcategoryComponent,
-    TaskformComponent
+    TaskformComponent,
+    TaskhomeComponent
   ],
   imports: [
     BrowserModule,
