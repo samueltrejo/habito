@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">habito</string>
+    <string name="title_activity_main">habito</string>
+    <string name="package_name">com.st.habito</string>
+    <string name="custom_url_scheme">com.st.habito</string>
+</resources>
