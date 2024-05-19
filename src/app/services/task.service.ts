@@ -12,6 +12,7 @@ import { Firestore, Unsubscribe, addDoc, collection, deleteDoc, doc, onSnapshot,
 export class TaskService {
   private firestore: Firestore = inject(Firestore);
   private taskGroupsListenerUnsub: Unsubscribe;
+  private taskGroups: TaskGroup[];
   public taskGroups$: Subject<TaskGroup[]> = new Subject<TaskGroup[]>();
 
 
@@ -41,11 +42,11 @@ export class TaskService {
         task.id = taskData.id;
         return task;
       });
-      this.taskGroups$.next(this.getCategorizedTasks(taskGroups));
+      this.categorizedTasks(taskGroups);
     });
   }
 
-  private getCategorizedTasks(tasks: Task[]): TaskGroup[] {
+  private categorizedTasks(tasks: Task[]): void {
     const groups: TaskGroup[] = [];
     for (let i = 0; i < tasks.length; i++) {
       const taskCategory = tasks[i].category;
@@ -56,6 +57,8 @@ export class TaskService {
       }
       group.tasks.push(tasks[i]);
     }
-    return groups;
+    // return groups;
+    this.taskGroups = groups;
+    this.taskGroups$.next(groups);
   }
 }

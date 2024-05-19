@@ -26,11 +26,16 @@ export class LandingComponent {
   taskGroups: TaskGroup[];
   taskService: TaskService = inject(TaskService);
   router: Router = inject(Router);
+  subscription: any;
 
   ngOnInit() {
-    this.taskService.taskGroups$.subscribe(data => {
+    this.subscription = this.taskService.taskGroups$.subscribe(data => {
       this.taskGroups = data;
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   getNumTasksCompletedString(taskGroup: TaskGroup): string {

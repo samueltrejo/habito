@@ -32,17 +32,18 @@ export class TaskhomeComponent {
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
   category: string;
+  subscription: any;
 
   ngOnInit() {
     this.category = this.activatedRoute.snapshot.params['category'];
-    this.taskService.taskGroups$.subscribe(data => {
+    this.subscription = this.taskService.taskGroups$.subscribe(data => {
       this.taskGroups = data;
     });
 
   }
 
   ngOnDestroy() {
-    this.taskService.taskGroups$.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   setCategory(taskcategory: string): void {
