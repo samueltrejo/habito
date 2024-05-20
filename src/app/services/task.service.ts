@@ -20,6 +20,10 @@ export class TaskService {
     this.getTasksObservable();
   }
 
+  public getAllTaskGroups(): TaskGroup[] {
+    return this.taskGroups;
+  }
+
   public async addTask(newTask: Task): Promise<void> {
     const docRef = await addDoc(collection(this.firestore, 'tasks'), newTask);
     // console.log("Document written with ID: ", docRef.id);

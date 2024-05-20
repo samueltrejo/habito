@@ -29,6 +29,7 @@ export class LandingComponent {
   subscription: any;
 
   ngOnInit() {
+    this.taskGroups = this.taskService.getAllTaskGroups();
     this.subscription = this.taskService.taskGroups$.subscribe(data => {
       this.taskGroups = data;
     });

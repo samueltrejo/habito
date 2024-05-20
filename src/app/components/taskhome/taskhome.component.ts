@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 import { TaskGroup } from 'src/app/models/taskgroup';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -32,18 +33,33 @@ export class TaskhomeComponent {
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
   category: string;
-  subscription: any;
+
+  urlSub: any;
+  taskGroupSub: any;
 
   ngOnInit() {
     this.category = this.activatedRoute.snapshot.params['category'];
-    this.subscription = this.taskService.taskGroups$.subscribe(data => {
-      this.taskGroups = data;
+    this.urlSub = this.router.events
+    .pipe(
+      filter(event => event instanceof NavigationStart),
+      map(event => event as NavigationStart)
+    )
+    .subscribe(event => {
+      this.category = event.url.slice(1);
     });
 
+    this.taskGroups = this.taskService.getAllTaskGroups();
+    this.taskGroupSub = this.taskService.taskGroups$.subscribe(data => {
+      this.taskGroups = data;
+    });
+  }
+
+  ngOnChanges() {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.urlSub.unsubscribe();
+    this.taskGroupSub.unsubscribe();
   }
 
   setCategory(taskcategory: string): void {
