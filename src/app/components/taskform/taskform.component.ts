@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TASK_FORM_TEMPLATE } from 'src/app/constants/constants';
 import { TaskService } from 'src/app/services/task.service';
@@ -47,9 +47,18 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./taskform.component.scss']
 })
 export class TaskformComponent {
+  @Input() category: string = '';
   fb: FormBuilder = inject(FormBuilder);
   taskService: TaskService = inject(TaskService);
-  newTaskForm: FormGroup = this.fb.group(TASK_FORM_TEMPLATE)
+  newTaskForm: FormGroup = this.fb.group(TASK_FORM_TEMPLATE);
+
+  ngOnChanges() {
+    if (!this.category) return;
+
+    let newTask = TASK_FORM_TEMPLATE;
+    newTask.category = this.category;
+    this.newTaskForm.setValue(newTask);
+  }
 
   addTask() {
     // console.log(this.newTaskForm.value);

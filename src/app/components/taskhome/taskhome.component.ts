@@ -10,13 +10,13 @@ import { TaskService } from 'src/app/services/task.service';
     <div class="container mt-5">
       <div class="row">
         <div class="col-3">
-          <h2>Category</h2>
+          <div><span style="font-size: 2rem; font-weight: 500;">Category</span></div>
           <div class="list-group" id="list-tab" role="tablist">
             <app-taskcategory *ngFor="let taskGroup of taskGroups" [taskGroup]="taskGroup" (click)="setCategory(taskGroup.category)"></app-taskcategory>
           </div>
         </div>
         <div class="col-9">
-          <div><span style="font-size: 2rem; font-weight: 500;">Tasks</span> <app-taskform></app-taskform></div>
+          <div><span style="font-size: 2rem; font-weight: 500;">Tasks</span> <app-taskform [category]="category"></app-taskform></div>
           <div class="tab-content" id="nav-tabContent">
             <app-taskgroup *ngFor="let taskGroup of taskGroups" [taskGroup]="taskGroup" class="tab-pane fade{{isShown(taskGroup.category)}}" id="{{taskGroup.category}}" role="tabpanel" aria-labelledby="list-home-list"></app-taskgroup>
           </div>
