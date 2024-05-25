@@ -6,6 +6,10 @@ import { TaskService } from 'src/app/services/task.service';
 @Component({
   selector: 'app-landing',
   template: `
+  <div class="container py-3 bg-dark text-light">
+    <h3>Overview</h3>
+    <div>{{getDate()}}</div>
+  </div>
   <div class="container">
     <div class="d-flex flex-wrap justify-content-center mt-5">
       <div *ngFor="let taskGroup of taskGroups" class="card m-3" style="width: 18rem;">
@@ -56,5 +60,17 @@ export class LandingComponent {
 
   goToCategory(category: string) {
     this.router.navigate(['/' + category]);
+  }
+
+  getDate(): string {
+    const event = new Date();
+    const options:any = {
+      weekday: 'long',
+      // year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };    
+
+    return event.toLocaleDateString(undefined, options)
   }
 }
