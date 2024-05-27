@@ -6,13 +6,15 @@ import { TaskService } from 'src/app/services/task.service';
 @Component({
   selector: 'app-landing',
   template: `
-  <div class="container py-3 bg-dark text-light">
-    <h3>Overview</h3>
-    <div>{{getDate()}}</div>
+  <div class="py-3 bg-stdark text-light">
+    <div class="container">
+      <h3>Overview</h3>
+      <div>{{getDate()}}</div>
+    </div>
   </div>
   <div class="container">
     <div class="d-flex flex-wrap justify-content-center mt-5">
-      <div *ngFor="let taskGroup of taskGroups" class="card m-3" style="width: 18rem;">
+      <div *ngFor="let taskGroup of taskGroups" class="card m-3 w-100">
         <div class="card-body" style="cursor: pointer;" (click)="goToCategory(taskGroup.category)">
           <h6 class="card-subtitle mb-2 text-body-secondary">{{taskGroup.category}}</h6>
           <div class="mute text-end me-2" style="font-size: 10px;">{{getNumTasksCompletedString(taskGroup)}}</div>
