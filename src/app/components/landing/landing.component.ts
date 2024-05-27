@@ -14,9 +14,9 @@ import { TaskService } from 'src/app/services/task.service';
   </div>
   <div class="container">
     <div class="d-flex flex-wrap justify-content-center mt-5">
-      <div *ngFor="let taskGroup of taskGroups" class="card m-3 w-100">
-        <div class="card-body" style="cursor: pointer;" (click)="goToCategory(taskGroup.category)">
-          <h6 class="card-subtitle mb-2 text-body-secondary">{{taskGroup.category}}</h6>
+      <div *ngFor="let taskGroup of taskGroups" class="card border-dark m-3 w-100">
+        <div class="card-body bg-stdark text-light" style="cursor: pointer;" (click)="goToCategory(taskGroup.category)">
+          <h6 class="card-subtitle mb-2 text-light">{{taskGroup.category}}</h6>
           <div class="mute text-end me-2" style="font-size: 10px;">{{getNumTasksCompletedString(taskGroup)}}</div>
           <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
             <div class="progress-bar" style="width: {{getPercentageComplete(taskGroup)}}%"></div>
