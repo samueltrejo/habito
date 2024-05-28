@@ -8,13 +8,13 @@ import { TaskService } from 'src/app/services/task.service';
   template: `
   <div class="position-relative">
 
-    <label class="list-group-item d-flex justify-content-between gap-2" [formGroup]="taskForm">
+    <label class="list-group-item d-flex justify-content-between gap-2 bg-stdark text-light border-dark" [formGroup]="taskForm">
       <div>
 
         <input class="form-check-input flex-shrink-0" type="checkbox" formControlName="isComplete" (change)="updateTaskStatus($event)">
         <span>
           {{task.name}}
-          <small class="d-block text-body-secondary">{{task.description}}</small>
+          <small class="d-block text-light">{{task.description}}</small>
         </span>
       </div>
     </label>

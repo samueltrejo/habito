@@ -22,14 +22,15 @@ import { TaskService } from 'src/app/services/task.service';
       <div class="tab-content" id="nav-tabContent">
         <app-taskgroup *ngFor="let taskGroup of taskGroups" [taskGroup]="taskGroup" class="tab-pane fade{{isShown(taskGroup.category)}}" id="{{taskGroup.category}}" role="tabpanel" aria-labelledby="list-home-list"></app-taskgroup>
         <div class="list-group">
-          <div class="position-relative">
-            <label class="list-group-item d-flex justify-content-between gap-2">
+          <div class="position-relative text-stgrey">
+            <label class="list-group-item d-flex justify-content-between gap-2 bg-stgrey border-dark text-stgrey">
               <div>
                 <i class="bi bi-journal-text me-1"></i>
-                <small class="text-body-secondary">Create a new todo.</small>
+                <small>Create a new todo.</small>
               </div>
             </label>
-            <i class="bi bi-plus-square-fill m2" style="position: absolute; right: 10px; top: 10px; cursor: pointer; z-index: 1;"></i>
+            <!-- <i class="bi bi-plus-square-fill m2" style="position: absolute; right: 10px; top: 10px; cursor: pointer; z-index: 1;"></i> -->
+            <app-taskform class="task-form" style="position: absolute; right: 10px; top: 0px; cursor: pointer;" [category]="category"></app-taskform>
             </div>
         </div>
       </div>
