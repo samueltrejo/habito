@@ -19,7 +19,7 @@ import { TaskService } from 'src/app/services/task.service';
           <h6 class="card-subtitle mb-2 text-light">{{taskGroup.category}}</h6>
           <div class="mute text-end me-2" style="font-size: 10px;">{{getNumTasksCompletedString(taskGroup)}}</div>
           <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" style="width: {{getPercentageComplete(taskGroup)}}%"></div>
+            <div class="progress-bar" style="width: {{getPercentageComplete(taskGroup)}}%;"></div>
           </div>
         </div>
       </div>
