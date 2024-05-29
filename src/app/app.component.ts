@@ -14,7 +14,10 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-    <router-outlet></router-outlet>
+    <div class="app-body">
+      <router-outlet></router-outlet>
+    </div>
+    <app-navigation></app-navigation>
   `,
   styleUrls: ['./app.component.scss']
 })
