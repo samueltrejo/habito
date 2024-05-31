@@ -15,6 +15,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { TaskformComponent } from './components/taskform/taskform.component';
 import { TaskhomeComponent } from './components/taskhome/taskhome.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { TrackerComponent } from './components/tracker/tracker.component';
 const firebaseConfig = {
   apiKey: "AIzaSyACgyBP2ZjnEPYZDXmPQmCCTTjPkJLSq7o",
   authDomain: "majestad-df1a6.firebaseapp.com",
@@ -34,7 +35,8 @@ const firebaseConfig = {
     TaskcategoryComponent,
     TaskformComponent,
     TaskhomeComponent,
-    NavigationComponent
+    NavigationComponent,
+    TrackerComponent
   ],
   imports: [
     BrowserModule,

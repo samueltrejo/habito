@@ -61,11 +61,12 @@ export class LandingComponent {
   }
 
   goToCategory(category: string) {
-    this.router.navigate(['/' + category]);
+    this.router.navigate(['/tasks/' + category]);
   }
 
   getDate(): string {
     const event = new Date();
+    console.log(event);
     const options:any = {
       weekday: 'long',
       // year: 'numeric',

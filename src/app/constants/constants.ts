@@ -1,5 +1,15 @@
 import { Task } from "../models/task";
 
+export const DAYS_OF_WEEK = [
+  {abbreviation: 'Sun', fullName: 'Sunday'},
+  {abbreviation: 'Mon', fullName: 'Monday'},
+  {abbreviation: 'Tue', fullName: 'Tuesday'},
+  {abbreviation: 'Wed', fullName: 'Wednesday'},
+  {abbreviation: 'Thu', fullName: 'Thursday'},
+  {abbreviation: 'Fri', fullName: 'Friday'},
+  {abbreviation: 'Sat', fullName: 'Saturday'},
+]
+
 export const TASK_FORM_TEMPLATE: Task = {
   id: '',
   name: '',
