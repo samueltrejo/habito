@@ -25,33 +25,68 @@ export const TASK_COMPLETIONS = [
     taskid: '3JNaK6JALRlueycVwCKH'
   },
   {
-    id: 'taskcomp1',
+    id: 'taskcomp2',
     date: '20240531',
     taskid: 'CTlnKKRvJw61vaGtJrml'
   },
   {
-    id: 'taskcomp1',
+    id: 'taskcomp3',
     date: '20240531',
     taskid: 'Ko594uics3spnX2iyj3u'
   },
   {
-    id: 'taskcomp1',
+    id: 'taskcomp4',
     date: '20240531',
     taskid: 'SOiF1jhTtx5VhYOSaN9q'
   },
   {
-    id: 'taskcomp1',
+    id: 'taskcomp5',
     date: '20240531',
     taskid: 'YzFQuKWRt7eqBFjoBTYl'
   },
   {
-    id: 'taskcomp1',
+    id: 'taskcomp6',
     date: '20240531',
     taskid: 'axsjCFmEb7Z99zfxjKW2'
   },
   {
-    id: 'taskcomp1',
+    id: 'taskcomp7',
     date: '20240531',
+    taskid: 'dyAQZ5d3Gh13PQrMdIrY'
+  },
+  {
+    id: 'taskcomp8',
+    date: '20240601',
+    taskid: '3JNaK6JALRlueycVwCKH'
+  },
+  {
+    id: 'taskcomp9',
+    date: '20240601',
+    taskid: 'CTlnKKRvJw61vaGtJrml'
+  },
+  {
+    id: 'taskcomp10',
+    date: '20240601',
+    taskid: 'Ko594uics3spnX2iyj3u'
+  },
+  {
+    id: 'taskcomp11',
+    date: '20240601',
+    taskid: 'SOiF1jhTtx5VhYOSaN9q'
+  },
+  {
+    id: 'taskcomp12',
+    date: '20240601',
+    taskid: 'YzFQuKWRt7eqBFjoBTYl'
+  },
+  {
+    id: 'taskcomp13',
+    date: '20240601',
+    taskid: 'axsjCFmEb7Z99zfxjKW2'
+  },
+  {
+    id: 'taskcomp14',
+    date: '20240601',
     taskid: 'dyAQZ5d3Gh13PQrMdIrY'
   },
 ]
