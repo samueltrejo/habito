@@ -18,6 +18,44 @@ export const TASK_FORM_TEMPLATE: Task = {
   isComplete: false
 }
 
+export const TASK_COMPLETIONS = [
+  {
+    id: 'taskcomp1',
+    date: '20240531',
+    taskid: '3JNaK6JALRlueycVwCKH'
+  },
+  {
+    id: 'taskcomp1',
+    date: '20240531',
+    taskid: 'CTlnKKRvJw61vaGtJrml'
+  },
+  {
+    id: 'taskcomp1',
+    date: '20240531',
+    taskid: 'Ko594uics3spnX2iyj3u'
+  },
+  {
+    id: 'taskcomp1',
+    date: '20240531',
+    taskid: 'SOiF1jhTtx5VhYOSaN9q'
+  },
+  {
+    id: 'taskcomp1',
+    date: '20240531',
+    taskid: 'YzFQuKWRt7eqBFjoBTYl'
+  },
+  {
+    id: 'taskcomp1',
+    date: '20240531',
+    taskid: 'axsjCFmEb7Z99zfxjKW2'
+  },
+  {
+    id: 'taskcomp1',
+    date: '20240531',
+    taskid: 'dyAQZ5d3Gh13PQrMdIrY'
+  },
+]
+
 export const TASKS: Task[] = [
     {
         id: '',
