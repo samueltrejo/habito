@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.st.habito',
-  appName: 'habito',
+  appName: 'Habiticus',
   webDir: 'dist/habito'
 };
 

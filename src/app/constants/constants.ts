@@ -1,5 +1,15 @@
 import { Task } from "../models/task";
 
+export const DAYS_OF_WEEK = [
+  {abbreviation: 'Sun', fullName: 'Sunday'},
+  {abbreviation: 'Mon', fullName: 'Monday'},
+  {abbreviation: 'Tue', fullName: 'Tuesday'},
+  {abbreviation: 'Wed', fullName: 'Wednesday'},
+  {abbreviation: 'Thu', fullName: 'Thursday'},
+  {abbreviation: 'Fri', fullName: 'Friday'},
+  {abbreviation: 'Sat', fullName: 'Saturday'},
+]
+
 export const TASK_FORM_TEMPLATE: Task = {
   id: '',
   name: '',
@@ -7,6 +17,79 @@ export const TASK_FORM_TEMPLATE: Task = {
   category: '',
   isComplete: false
 }
+
+export const TASK_COMPLETIONS = [
+  {
+    id: 'taskcomp1',
+    date: '20240531',
+    taskid: '3JNaK6JALRlueycVwCKH'
+  },
+  {
+    id: 'taskcomp2',
+    date: '20240531',
+    taskid: 'CTlnKKRvJw61vaGtJrml'
+  },
+  {
+    id: 'taskcomp3',
+    date: '20240531',
+    taskid: 'Ko594uics3spnX2iyj3u'
+  },
+  {
+    id: 'taskcomp4',
+    date: '20240531',
+    taskid: 'SOiF1jhTtx5VhYOSaN9q'
+  },
+  {
+    id: 'taskcomp5',
+    date: '20240531',
+    taskid: 'YzFQuKWRt7eqBFjoBTYl'
+  },
+  {
+    id: 'taskcomp6',
+    date: '20240531',
+    taskid: 'axsjCFmEb7Z99zfxjKW2'
+  },
+  {
+    id: 'taskcomp7',
+    date: '20240531',
+    taskid: 'dyAQZ5d3Gh13PQrMdIrY'
+  },
+  {
+    id: 'taskcomp8',
+    date: '20240601',
+    taskid: '3JNaK6JALRlueycVwCKH'
+  },
+  {
+    id: 'taskcomp9',
+    date: '20240601',
+    taskid: 'CTlnKKRvJw61vaGtJrml'
+  },
+  {
+    id: 'taskcomp10',
+    date: '20240601',
+    taskid: 'Ko594uics3spnX2iyj3u'
+  },
+  {
+    id: 'taskcomp11',
+    date: '20240601',
+    taskid: 'SOiF1jhTtx5VhYOSaN9q'
+  },
+  {
+    id: 'taskcomp12',
+    date: '20240601',
+    taskid: 'YzFQuKWRt7eqBFjoBTYl'
+  },
+  {
+    id: 'taskcomp13',
+    date: '20240601',
+    taskid: 'axsjCFmEb7Z99zfxjKW2'
+  },
+  {
+    id: 'taskcomp14',
+    date: '20240601',
+    taskid: 'dyAQZ5d3Gh13PQrMdIrY'
+  },
+]
 
 export const TASKS: Task[] = [
     {

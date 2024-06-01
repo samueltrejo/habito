@@ -6,54 +6,74 @@ import { TaskService } from 'src/app/services/task.service';
 @Component({
   selector: 'app-landing',
   template: `
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-3">
-          <h2>Category</h2>
-          <div class="list-group" id="list-tab" role="tablist">
-            <app-taskcategory *ngFor="let taskGroup of taskGroups" [taskGroup]="taskGroup" (click)="setCategory(taskGroup.category)"></app-taskcategory>
-          </div>
-        </div>
-        <div class="col-9">
-          <div><span style="font-size: 2rem; font-weight: 500;">Tasks</span> <app-taskform></app-taskform></div>
-          <div class="tab-content" id="nav-tabContent">
-            <app-taskgroup *ngFor="let taskGroup of taskGroups" [taskGroup]="taskGroup" class="tab-pane fade{{isShown(taskGroup.category)}}" id="{{taskGroup.category}}" role="tabpanel" aria-labelledby="list-home-list"></app-taskgroup>
+  <div class="py-3 bg-stdark text-light">
+    <div class="container">
+      <h3>Overview</h3>
+      <div>{{getDate()}}</div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-center mt-5">
+      <div *ngFor="let taskGroup of taskGroups" class="card border-dark m-3 w-100">
+        <div class="card-body bg-stdark text-light" style="cursor: pointer;" (click)="goToCategory(taskGroup.category)">
+          <h6 class="card-subtitle mb-2 text-light">{{taskGroup.category}}</h6>
+          <div class="mute text-end me-2" style="font-size: 10px;">{{getNumTasksCompletedString(taskGroup)}}</div>
+          <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: {{getPercentageComplete(taskGroup)}}%;"></div>
           </div>
         </div>
       </div>
-
     </div>
-
-    <!-- taskform modal -->
+  </div>
   `,
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent {
   taskGroups: TaskGroup[];
   taskService: TaskService = inject(TaskService);
-  activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
-  category: string;
+  subscription: any;
 
   ngOnInit() {
-    this.category = this.activatedRoute.snapshot.params['category'];
-    this.taskService.taskGroups$.subscribe(data => {
+    this.taskGroups = this.taskService.getAllTaskGroups();
+    this.subscription = this.taskService.taskGroups$.subscribe(data => {
       this.taskGroups = data;
     });
-
   }
 
   ngOnDestroy() {
-    this.taskService.taskGroups$.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
-  setCategory(taskcategory: string): void {
-    this.category = taskcategory;
-    this.router.navigate(['/' + taskcategory]);
+  getNumTasksCompletedString(taskGroup: TaskGroup): string {
+    if (!taskGroup) return "0 of 0";
+
+    const completeTasksCount = taskGroup.tasks.filter(x => x.isComplete === true).length;
+    return `${completeTasksCount} of ${taskGroup.tasks.length}`
   }
 
-  isShown(taskCategory: string): string {
-    if (this.category == taskCategory) return " active show";
-    else return ""
+  getPercentageComplete(taskGroup: TaskGroup): number {
+    if (!taskGroup) return 0;
+
+    const completeTasksCount = taskGroup.tasks.filter(x => x.isComplete === true).length;
+    const completeTasksPercentage = (completeTasksCount / taskGroup.tasks.length) * 100;
+    return completeTasksPercentage;
+  }
+
+  goToCategory(category: string) {
+    this.router.navigate(['/tasks/' + category]);
+  }
+
+  getDate(): string {
+    const event = new Date();
+    console.log(event);
+    const options:any = {
+      weekday: 'long',
+      // year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };    
+
+    return event.toLocaleDateString(undefined, options)
   }
 }

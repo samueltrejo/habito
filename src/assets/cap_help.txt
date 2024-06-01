@@ -12,3 +12,10 @@ npx cap add android
 
 npx cap open ios
 npx cap open android
+
+/**run this after making changes**/
+npx cap copy
+
+
+/**run this after making native functionality changes**/
+npx cap sync
