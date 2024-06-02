@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { DAYS_OF_WEEK } from 'src/app/constants/constants';
 import { TASK_COMPLETIONS } from 'src/app/constants/constants';
+import { DateService } from 'src/app/services/date.service';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -24,6 +25,7 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TrackerComponent {
   taskService: TaskService = inject(TaskService);
+  dateService: DateService = inject(DateService);
   monthDays: any;
   subscription: any;
 

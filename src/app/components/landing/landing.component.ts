@@ -66,7 +66,6 @@ export class LandingComponent {
 
   getDate(): string {
     const event = new Date();
-    console.log(event);
     const options:any = {
       weekday: 'long',
       // year: 'numeric',
