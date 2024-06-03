@@ -71,32 +71,53 @@ export class TaskService {
 
   private setMonthDayTasks(): void {
     const monthObj = this.dateService.getMonthObject();
-    // twoDigit
+    // number
+    // twoDigitString
     // name
     // year
     // daysInMonth
     // dayOffset
 
+    // const monthDays = Array.from({length: monthObj.daysInMonth}, (_, i) => {
+    //   const dayNum = i + 1;
+    //   const monthDay: any = { date: dayNum, day: DAYS_OF_WEEK[(i + monthObj.dayOffset) % 7] }
+
+    //   const dateId = `${monthObj.year}${monthObj.twoDigit}${('0' + dayNum).slice(-2)}`
+
+    //   monthDay.taskGroups = this.taskGroups.map(taskGroup => {
+    //     taskGroup.tasks = taskGroup.tasks.map(task => {
+    //       task.isComplete = !!TASK_COMPLETIONS.find(x => x.date == dateId && x.taskid == task.id);
+    //       return task;
+    //     });
+    //     return taskGroup;
+    //   });
+    //   return monthDay;
+    // });
+
     const monthDays = Array.from({length: monthObj.daysInMonth}, (_, i) => {
-      const dayNum = i + 1;
-      const monthDay: any = { date: dayNum, day: DAYS_OF_WEEK[(i + monthObj.dayOffset) % 7] }
+      const monthDay: any = { date: i + 1, day: DAYS_OF_WEEK[(i + monthObj.dayOffset) % 7] }
 
-      const dateId = `${monthObj.year}${monthObj.twoDigit}${('0' + dayNum).slice(-2)}`
+      const dateStringObject = {
+        month: ('0' + (monthObj.number + 1)).slice(-2),
+        day: ('0' + (i + 1)).slice(-2)
+      }
 
-      console.log(dateId);
+      // const taskGroups = this.taskGroups.map(taskGroup => {
+      //   const tasks = taskGroup.tasks.map(task => {
+      //     const ttt = {...task};
+      //     const dateId = `${monthObj.year}${dateStringObject.month}${dateStringObject.day}`;
+      //     ttt.isComplete = (i + 1) == 30;
+      //     return ttt;
+      //   });
+      //   taskGroup.tasks = tasks;
+      //   return taskGroup;
+      // });
 
-      const taskGroups = this.taskGroups.map(taskGroup => {
-        const tasks = taskGroup.tasks.map(task => {
-          task.isComplete = !!TASK_COMPLETIONS.find(x => x.date == dateId && x.taskid == task.id);
-          return task;
-        });
-        taskGroup.tasks = tasks;
-        return taskGroup;
-      });
-
-      monthDay.taskGroups = taskGroups;
+      // monthDay.taskGroups = taskGroups;
       return monthDay;
     });
-    console.log(monthDays);
+
+
+    // console.log(monthDays);
   }
 }

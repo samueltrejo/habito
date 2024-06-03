@@ -17,7 +17,9 @@ import { TaskService } from 'src/app/services/task.service';
   <div class="container text-light mt-5">
     <div *ngFor="let monthDay of monthDays">
       <div class="bg-stdark p-3 me-2 mb-2 rounded text-center" style="display: inline-block; width: 80px; height: 50px; white-space: nowrap; font-size: .8rem;">{{monthDay.date}} {{monthDay.day.abbreviation}}</div>
-      <span *ngFor="let taskgroup of monthDay.taskGroups" class="me-3">{{taskgroup.category}}</span>
+      <span *ngFor="let taskgroup of monthDay.taskGroups">
+        <span *ngFor="let task of taskgroup.tasks" class="me-3{{task.isComplete ? ' text-success' : ' text-danger'}}">{{task.name}}</span>
+      </span>
     </div>
   </div>
   `,
@@ -44,7 +46,8 @@ export class TrackerComponent {
           day: ('0' + (i + 1)).slice(-2)
         }
   
-        const taskGroups = data.map(taskGroup => {
+        const ddata = data.slice();
+        const taskGroups = ddata.map(taskGroup => {
           const tasks = taskGroup.tasks.map(task => {
             const dateId = `${today.getFullYear()}${dateStringObject.month}${dateStringObject.day}`;
             task.isComplete = !!TASK_COMPLETIONS.find(x => x.date == dateId && x.taskid == task.id);
@@ -59,6 +62,10 @@ export class TrackerComponent {
       });
       // console.log(this.monthDays);
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   getDate(): string {

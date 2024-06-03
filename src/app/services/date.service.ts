@@ -19,7 +19,8 @@ export class DateService {
 
   private setMonthObject() {
     this.monthObject = {
-      twoDigit: ('0' + (this.dateObject.getMonth() + 1)).slice(-2),
+      number: this.dateObject.getMonth(),
+      twoDigitString: ('0' + (this.dateObject.getMonth() + 1)).slice(-2),
       name: this.dateObject.toLocaleDateString(undefined, { month: 'long' }),
       year: this.dateObject.getFullYear(),
       daysInMonth: new Date(this.dateObject.getFullYear(), this.dateObject.getMonth() + 1, 0).getDate(),
