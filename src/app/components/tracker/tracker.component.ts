@@ -57,7 +57,7 @@ export class TrackerComponent {
         monthDay.taskGroups = taskGroups;
         return monthDay;
       });
-      console.log(this.monthDays);
+      // console.log(this.monthDays);
     });
   }
 
