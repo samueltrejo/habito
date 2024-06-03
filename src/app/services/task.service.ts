@@ -85,12 +85,14 @@ export class TaskService {
     // daysInMonth
     // dayOffset
 
-    console.log('t');
+    let tg = JSON.parse(JSON.stringify(taskGroups));
+    console.log(tg[1].tasks[0].isComplete, taskGroups[1].tasks[0].isComplete);
+    tg[1].tasks[0].isComplete = false;
+    console.log(tg[1].tasks[0].isComplete, taskGroups[1].tasks[0].isComplete);
 
     const monthDays = Array.from({length: monthObj.daysInMonth}, (_, i) => {
       const dayNum = i + 1;
       const monthDay: any = { date: dayNum, day: DAYS_OF_WEEK[(i + monthObj.dayOffset) % 7] }
-
       
       // monthDay.taskGroups = taskGroups.map(taskGroup => {
       //   taskGroup.tasks = taskGroup.tasks.map(task => {
