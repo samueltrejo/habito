@@ -32,40 +32,11 @@ export class TrackerComponent {
   subscription: any;
 
   ngOnInit() {
-    const today = new Date();
-    const monthNumOfDays = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-    const dayOffset = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
-
-    this.subscription = this.taskService.taskGroups$.subscribe(data => {
-
-      this.monthDays = Array.from({length: monthNumOfDays}, (_, i) => {
-        const monthDay: any = { date: i + 1, day: DAYS_OF_WEEK[(i + dayOffset) % 7] }
-
-        const dateStringObject = {
-          month: ('0' + (today.getMonth() + 1)).slice(-2),
-          day: ('0' + (i + 1)).slice(-2)
-        }
-  
-        const ddata = data.slice();
-        const taskGroups = ddata.map(taskGroup => {
-          const tasks = taskGroup.tasks.map(task => {
-            const dateId = `${today.getFullYear()}${dateStringObject.month}${dateStringObject.day}`;
-            task.isComplete = !!TASK_COMPLETIONS.find(x => x.date == dateId && x.taskid == task.id);
-            return task;
-          });
-          taskGroup.tasks = tasks;
-          return taskGroup;
-        });
-
-        monthDay.taskGroups = taskGroups;
-        return monthDay;
-      });
-      // console.log(this.monthDays);
-    });
+    // console.log('t');
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 
   getDate(): string {

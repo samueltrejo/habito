@@ -20,6 +20,7 @@ export class TaskService {
 
   constructor() {
     this.getTasksObservable();
+    this.setTaskGroupsObservable();
   }
 
   public getAllTaskGroups(): TaskGroup[] {
@@ -41,19 +42,25 @@ export class TaskService {
     await deleteDoc(docRef);
   }
 
+  private setTaskGroupsObservable(): void {
+    this.taskGroups$.subscribe(x => {
+      this.taskGroups = x;
+    });
+  }
+
   private getTasksObservable(): void {
     this.taskGroupsListenerUnsub = onSnapshot(collection(this.firestore, 'tasks'), (result) => {
-      const taskGroups: Task[] = result.docs.map(taskData => {
+      const tasks: Task[] = result.docs.map(taskData => {
         const task: Task = taskData.data() as Task;
         task.id = taskData.id;
         return task;
       });
-      this.categorizedTasks(taskGroups);
-      this.setMonthDayTasks();
+      const taskGroups = this.categorizedTasks(tasks);
+      this.setMonthDayTasks(taskGroups);
     });
   }
 
-  private categorizedTasks(tasks: Task[]): void {
+  private categorizedTasks(tasks: Task[]): TaskGroup[] {
     const groups: TaskGroup[] = [];
     for (let i = 0; i < tasks.length; i++) {
       const taskCategory = tasks[i].category;
@@ -65,11 +72,11 @@ export class TaskService {
       group.tasks.push(tasks[i]);
     }
     // return groups;
-    this.taskGroups = groups;
-    this.taskGroups$.next(groups);
+    // this.taskGroups$.next(groups);
+    return groups;
   }
 
-  private setMonthDayTasks(): void {
+  private setMonthDayTasks(taskGroups: TaskGroup[]): void {
     const monthObj = this.dateService.getMonthObject();
     // number
     // twoDigitString
@@ -78,42 +85,25 @@ export class TaskService {
     // daysInMonth
     // dayOffset
 
-    // const monthDays = Array.from({length: monthObj.daysInMonth}, (_, i) => {
-    //   const dayNum = i + 1;
-    //   const monthDay: any = { date: dayNum, day: DAYS_OF_WEEK[(i + monthObj.dayOffset) % 7] }
-
-    //   const dateId = `${monthObj.year}${monthObj.twoDigit}${('0' + dayNum).slice(-2)}`
-
-    //   monthDay.taskGroups = this.taskGroups.map(taskGroup => {
-    //     taskGroup.tasks = taskGroup.tasks.map(task => {
-    //       task.isComplete = !!TASK_COMPLETIONS.find(x => x.date == dateId && x.taskid == task.id);
-    //       return task;
-    //     });
-    //     return taskGroup;
-    //   });
-    //   return monthDay;
-    // });
+    console.log('t');
 
     const monthDays = Array.from({length: monthObj.daysInMonth}, (_, i) => {
-      const monthDay: any = { date: i + 1, day: DAYS_OF_WEEK[(i + monthObj.dayOffset) % 7] }
+      const dayNum = i + 1;
+      const monthDay: any = { date: dayNum, day: DAYS_OF_WEEK[(i + monthObj.dayOffset) % 7] }
 
-      const dateStringObject = {
-        month: ('0' + (monthObj.number + 1)).slice(-2),
-        day: ('0' + (i + 1)).slice(-2)
-      }
-
-      // const taskGroups = this.taskGroups.map(taskGroup => {
-      //   const tasks = taskGroup.tasks.map(task => {
-      //     const ttt = {...task};
-      //     const dateId = `${monthObj.year}${dateStringObject.month}${dateStringObject.day}`;
-      //     ttt.isComplete = (i + 1) == 30;
-      //     return ttt;
+      
+      // monthDay.taskGroups = taskGroups.map(taskGroup => {
+      //   taskGroup.tasks = taskGroup.tasks.map(task => {
+      //     const dateId = `${monthObj.year}${monthObj.twoDigit}${('0' + dayNum).slice(-2)}`
+      //     task.isComplete = !!TASK_COMPLETIONS.find(x => x.date == dateId && x.taskid == task.id);
+      //     return task;
       //   });
-      //   taskGroup.tasks = tasks;
       //   return taskGroup;
       // });
 
-      // monthDay.taskGroups = taskGroups;
+
+      monthDay.taskGroups = taskGroups;
+
       return monthDay;
     });
 
