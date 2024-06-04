@@ -16,9 +16,13 @@ import { TaskService } from 'src/app/services/task.service';
 
   <div class="container text-light mt-5">
     <div *ngFor="let monthDay of monthDays">
-      <div class="bg-stdark p-3 me-2 mb-2 rounded text-center" style="display: inline-block; width: 80px; height: 50px; white-space: nowrap; font-size: .8rem;">{{monthDay.date}} {{monthDay.day.abbreviation}}</div>
+      <div class="tracker-tile bg-stdark">{{monthDay.date}} {{monthDay.day.abbreviation}}</div>
       <span *ngFor="let taskgroup of monthDay.taskGroups">
-        <span *ngFor="let task of taskgroup.tasks" class="me-3{{task.isComplete ? ' text-success' : ' text-danger'}}">{{task.name}}</span>
+        <span 
+          *ngFor="let task of taskgroup.tasks" 
+          class="tracker-tile{{task.isComplete ? ' bg-success' : ' bg-danger'}}" 
+          style="color: transparent;"
+          [title]="task.name">.</span>
       </span>
     </div>
   </div>
@@ -32,7 +36,10 @@ export class TrackerComponent {
   subscription: any;
 
   ngOnInit() {
-    // console.log('t');
+    this.monthDays = this.taskService.monthDays;
+    this.taskService.monthDays$.subscribe(x => {
+      this.monthDays = x;
+    });
   }
 
   ngOnDestroy() {

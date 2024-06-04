@@ -16,11 +16,14 @@ export class TaskService {
   private taskGroupsListenerUnsub: Unsubscribe;
   private taskGroups: TaskGroup[];
   public taskGroups$: Subject<TaskGroup[]> = new Subject<TaskGroup[]>();
+  public monthDays$: Subject<any> = new Subject<any>();
+  public monthDays: any;
 
 
   constructor() {
     this.getTasksObservable();
     this.setTaskGroupsObservable();
+    this.setMonthDaysObservable();
   }
 
   public getAllTaskGroups(): TaskGroup[] {
@@ -45,6 +48,12 @@ export class TaskService {
   private setTaskGroupsObservable(): void {
     this.taskGroups$.subscribe(x => {
       this.taskGroups = x;
+    });
+  }
+
+  private setMonthDaysObservable(): void {
+    this.monthDays$.subscribe(x => {
+      this.monthDays = x;
     });
   }
 
@@ -85,31 +94,25 @@ export class TaskService {
     // daysInMonth
     // dayOffset
 
-    let tg = JSON.parse(JSON.stringify(taskGroups));
-    console.log(tg[1].tasks[0].isComplete, taskGroups[1].tasks[0].isComplete);
-    tg[1].tasks[0].isComplete = false;
-    console.log(tg[1].tasks[0].isComplete, taskGroups[1].tasks[0].isComplete);
-
+    
     const monthDays = Array.from({length: monthObj.daysInMonth}, (_, i) => {
       const dayNum = i + 1;
       const monthDay: any = { date: dayNum, day: DAYS_OF_WEEK[(i + monthObj.dayOffset) % 7] }
       
-      // monthDay.taskGroups = taskGroups.map(taskGroup => {
-      //   taskGroup.tasks = taskGroup.tasks.map(task => {
-      //     const dateId = `${monthObj.year}${monthObj.twoDigit}${('0' + dayNum).slice(-2)}`
-      //     task.isComplete = !!TASK_COMPLETIONS.find(x => x.date == dateId && x.taskid == task.id);
-      //     return task;
-      //   });
-      //   return taskGroup;
-      // });
+      const taskGroupsClone: TaskGroup[] = JSON.parse(JSON.stringify(taskGroups));
+      const dateId = `${monthObj.year}${monthObj.twoDigitString}${('0' + dayNum).slice(-2)}`
 
-
-      monthDay.taskGroups = taskGroups;
-
+      monthDay.taskGroups = taskGroupsClone.map(taskGroup => {
+        taskGroup.tasks = taskGroup.tasks.map(task => {
+          task.isComplete = !!TASK_COMPLETIONS.find(x => x.date == dateId && x.taskid == task.id);
+          return task;
+        });
+        return taskGroup;
+      });
       return monthDay;
     });
 
 
-    // console.log(monthDays);
+    this.monthDays$.next(monthDays);
   }
 }
