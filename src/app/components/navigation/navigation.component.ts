@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
       <div class="d-flex justify-content-around py-3">
         <i class="bi bi-house-door-fill" (click)="goToPage('')"></i>
         <i class="bi bi-calendar-week-fill" (click)="goToPage('tracker')"></i>
-        <i class="bi bi-card-heading"></i>
+        <i class="bi bi-card-heading" (click)="goToPage('flashcards')"></i>
       </div>
     </div>
   `,
