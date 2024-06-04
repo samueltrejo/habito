@@ -37,13 +37,13 @@ export class TrackerComponent {
 
   ngOnInit() {
     this.monthDays = this.taskService.monthDays;
-    this.taskService.monthDays$.subscribe(x => {
+    this.subscription = this.taskService.monthDays$.subscribe(x => {
       this.monthDays = x;
     });
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   getDate(): string {
