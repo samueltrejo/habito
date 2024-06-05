@@ -89,6 +89,16 @@ export const TASK_COMPLETIONS = [
     date: '20240601',
     taskid: 'dyAQZ5d3Gh13PQrMdIrY'
   },
+  {
+    id: 'taskcomp14',
+    date: '20240604',
+    taskid: 'dyAQZ5d3Gh13PQrMdIrY'
+  },
+  {
+    id: 'taskcomp14',
+    date: '20240630',
+    taskid: '3JNaK6JALRlueycVwCKH'
+  },
 ]
 
 export const TASKS: Task[] = [

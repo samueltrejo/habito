@@ -35,9 +35,17 @@ export class LandingComponent {
   subscription: any;
 
   ngOnInit() {
-    this.taskGroups = this.taskService.getAllTaskGroups();
-    this.subscription = this.taskService.taskGroups$.subscribe(data => {
-      this.taskGroups = data;
+    // this.taskGroups = this.taskService.getAllTaskGroups();
+    // this.subscription = this.taskService.taskGroups$.subscribe(data => {
+    //   this.taskGroups = data;
+    // });
+    // this.taskGroups = this.taskService.monthDays[0].taskGroups;
+    if (this.taskService.monthDays) {
+      this.taskGroups = this.taskService.monthDays[0].taskGroups;
+    }
+    this.subscription = this.taskService.monthDays$.subscribe(data => {
+      console.log(data);
+      this.taskGroups = data[0].taskGroups;
     });
   }
 
