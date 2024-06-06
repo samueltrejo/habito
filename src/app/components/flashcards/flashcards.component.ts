@@ -30,7 +30,9 @@ import { Router } from '@angular/router';
     </div> -->
 
     <div class="container d-flex justify-content-center mt-5">
-      <div style="height: 300px; width: 100px; background-color: red" (click)="changeCard()"></div>
+      <a href="/flashcards#fs{{flashCardId}}" (click)="changeCard1()">
+        <div style="height: 300px; width: 100px; background-color: red"></div>
+      </a>
       <div class="slider">
         <!-- <a *ngFor="let flashCard of flashCards" href="flashcards#{{flashCard.id}}">{{flashCard.id}}</a> -->
 
@@ -67,6 +69,11 @@ export class FlashcardsComponent {
 
   changeCard() {
     this.flashCardId++;
+    return this.flashCardId;
+  }
+
+  changeCard1() {
+    this.flashCardId--;
     return this.flashCardId;
   }
 }
