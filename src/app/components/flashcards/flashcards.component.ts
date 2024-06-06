@@ -30,9 +30,6 @@ import { Router } from '@angular/router';
     </div> -->
 
     <div class="container d-flex justify-content-center mt-5">
-      <a href="/flashcards#fs{{flashCardId}}" (click)="changeCard1()">
-        <div style="height: 300px; width: 100px; background-color: red"></div>
-      </a>
       <div class="slider">
         <!-- <a *ngFor="let flashCard of flashCards" href="flashcards#{{flashCard.id}}">{{flashCard.id}}</a> -->
 
@@ -51,9 +48,14 @@ import { Router } from '@angular/router';
           </div>
         </div>
       </div>
-      <a href="/flashcards#fs{{flashCardId}}" (click)="changeCard()">
-        <div style="height: 300px; width: 100px; background-color: red"></div>
-      </a>
+    </div>
+    <div class="container d-flex justify-content-center mt-3">
+    <a href="/flashcards#fs{{flashCardId}}" (click)="changeCard1()">
+      <div class="me-3" style="height: 100px; width: 100px; background-color: red"></div>
+    </a>
+    <a href="/flashcards#fs{{flashCardId}}" (click)="changeCard()">
+      <div style="height: 100px; width: 100px; background-color: red"></div>
+    </a>
     </div>
 
   </div>
