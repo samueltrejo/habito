@@ -1,7 +1,10 @@
+// @ts-nocheck
 import { Component, inject } from '@angular/core';
 import { DateService } from 'src/app/services/date.service';
 import { FLASH_CARDS } from 'src/app/constants/constants';
 import { Router } from '@angular/router';
+
+import $ from 'jquery';
 
 @Component({
   selector: 'app-flashcards',
@@ -30,9 +33,13 @@ import { Router } from '@angular/router';
     </div> -->
 
     <div class="container d-flex justify-content-center mt-5">
-      <div class="slider">
-        <!-- <a *ngFor="let flashCard of flashCards" href="flashcards#{{flashCard.id}}">{{flashCard.id}}</a> -->
+    
+      <a href="/flashcards#fs{{nextCardId}}" (click)="nextSlide(-1)">
+        <!-- TODO:fix expanding next-slid button causing screen to scroll up slightly -->
+        <div class="next-slide"><i class="bi bi-caret-left-fill"></i></div>
+      </a>
 
+      <div class="slider">
         <div class="slides">
           <div *ngFor="let flashCard of flashCards" id="{{flashCard.id}}">
             <div class="flip-card">
@@ -48,14 +55,11 @@ import { Router } from '@angular/router';
           </div>
         </div>
       </div>
-    </div>
-    <div class="container d-flex justify-content-center mt-3">
-    <a href="/flashcards#fs{{flashCardId}}" (click)="changeCard1()">
-      <div class="me-3" style="height: 100px; width: 100px; background-color: red"></div>
-    </a>
-    <a href="/flashcards#fs{{flashCardId}}" (click)="changeCard()">
-      <div style="height: 100px; width: 100px; background-color: red"></div>
-    </a>
+
+      <a href="/flashcards#fs{{nextCardId}}" (click)="nextSlide(+1)">
+        <div class="next-slide"><i class="bi bi-caret-right-fill"></i></div>
+      </a>
+
     </div>
 
   </div>
@@ -67,15 +71,38 @@ export class FlashcardsComponent {
   router: Router = inject(Router);
   headerDate: string = this.dateService.getDateString();
   flashCards: any = FLASH_CARDS;
-  flashCardId: number = 1;
+  nextCardId: number = 1;
 
-  changeCard() {
-    this.flashCardId++;
-    return this.flashCardId;
-  }
+  // TODO: code to check if card is on screen, use scroll event handler to update currentcardid
+  // ngAfterViewInit() {
+  //   // const t = $( "#fs1" )
+  //   // const t = document.getElementById('fs1')
+  //   // console.log(t);
 
-  changeCard1() {
-    this.flashCardId--;
-    return this.flashCardId;
+  //   if(this.isOnScreen($('#fs2'))) {
+  //     console.log('t');
+  //   }
+  // }
+
+  // isOnScreen(element: any)
+  // {
+  //     var curPos = element.offset();
+  //     console.log(curPos);
+  //     var curTop = curPos.top;
+  //     var screenHeight = $(window).height();
+  //     var screenWidth = $(window).width();
+  //     console.log(screenHeight, screenWidth);
+  //     return (curTop > screenHeight) ? false : true;
+  // }
+
+  nextSlide(nextOffset: number) {
+    const nextId = this.nextCardId + nextOffset;
+    if (nextId <= 0) {
+      this.nextCardId = this.flashCards.length;
+    } else if (nextId >= this.flashCards.length) {
+      this.nextCardId = 1;
+    } else {
+      this.nextCardId = nextId;
+    }
   }
 }
