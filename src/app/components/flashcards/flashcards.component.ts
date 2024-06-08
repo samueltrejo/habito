@@ -42,8 +42,8 @@ import $ from 'jquery';
       <div class="slider">
         <div class="slides">
           <div *ngFor="let flashCard of flashCards" id="{{flashCard.id}}">
-            <div class="flip-card">
-              <div class="flip-card-inner">
+            <div class="flip-card" (click)="flipCard(flashCard.id)">
+              <div id="{{flashCard.id}}-fci" class="flip-card-inner">
                 <div class="flip-card-front border border-primary bg-stdark rounded d-flex justify-content-center align-items-center">
                   <div class="text-light">{{flashCard.front}}</div>
                 </div>
@@ -94,6 +94,12 @@ export class FlashcardsComponent {
   //     console.log(screenHeight, screenWidth);
   //     return (curTop > screenHeight) ? false : true;
   // }
+
+  flipCard(cardId: string) {
+    const cardToFlip = document.getElementById(cardId + '-fci');
+    console.log(cardToFlip);
+    cardToFlip.classList.toggle('flipped');
+  }
 
   nextSlide(nextOffset: number) {
     const nextId = this.nextCardId + nextOffset;
