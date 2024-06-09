@@ -40,7 +40,7 @@ import $ from 'jquery';
       </a>
 
       <div class="slider">
-        <div class="slides" (scroll)="handleScroll()">
+        <div class="slides" (scroll)="handleScroll($event)">
           <div *ngFor="let flashCard of flashCards" id="{{flashCard.id}}">
             <div class="flip-card" (click)="flipCard(flashCard.id)">
               <div id="{{flashCard.id}}-fci" class="flip-card-inner">
@@ -109,8 +109,35 @@ export class FlashcardsComponent {
       return (curTop > screenHeight) ? false : true;
   }
 
-  handleScroll() {
-    console.log('t');
+  handleScroll($event) {
+    // this.flashCards.forEach(x => {
+    //   console.log(x);
+    // });
+
+    console.log($event);
+
+    // var scrollTimeout = null;
+    // var scrollendDelay = 500; // ms
+
+    // $(window).scroll(function() {
+    //     if ( scrollTimeout === null ) {
+    //         scrollbeginHandler();
+    //     } else {
+    //         clearTimeout( scrollTimeout );
+    //     }
+    //     scrollTimeout = setTimeout( scrollendHandler, scrollendDelay );
+    // });
+
+    // function scrollbeginHandler() {
+    //     // this code executes on "scrollbegin"
+    //     document.body.style.backgroundColor = "yellow";
+    // }
+
+    // function scrollendHandler() {
+    //     // this code executes on "scrollend"
+    //     document.body.style.backgroundColor = "gray";
+    //     scrollTimeout = null;
+    // }
   }
 
   flipCard(cardId: string) {
