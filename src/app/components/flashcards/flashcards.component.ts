@@ -40,7 +40,7 @@ import $ from 'jquery';
       </a>
 
       <div class="slider">
-        <div class="slides">
+        <div class="slides" (scroll)="handleScroll()">
           <div *ngFor="let flashCard of flashCards" id="{{flashCard.id}}">
             <div class="flip-card" (click)="flipCard(flashCard.id)">
               <div id="{{flashCard.id}}-fci" class="flip-card-inner">
@@ -94,6 +94,24 @@ export class FlashcardsComponent {
   //     console.log(screenHeight, screenWidth);
   //     return (curTop > screenHeight) ? false : true;
   // }
+
+  // ngOnInit() {
+  //   console.log('t');
+  // }
+
+  isOnScreen(element: any): boolean {
+      var curPos = element.offset();
+      console.log(curPos);
+      var curTop = curPos.top;
+      var screenHeight = $(window).height();
+      var screenWidth = $(window).width();
+      console.log(screenHeight, screenWidth);
+      return (curTop > screenHeight) ? false : true;
+  }
+
+  handleScroll() {
+    console.log('t');
+  }
 
   flipCard(cardId: string) {
     const cardToFlip = document.getElementById(cardId + '-fci');
