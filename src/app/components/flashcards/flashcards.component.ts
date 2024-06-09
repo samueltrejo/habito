@@ -40,7 +40,7 @@ import $ from 'jquery';
       </a>
 
       <div class="slider">
-        <div class="slides" (scroll)="handleScroll($event)">
+        <div class="slides" (scroll)="handleScroll()">
           <div *ngFor="let flashCard of flashCards" id="{{flashCard.id}}">
             <div class="flip-card" (click)="flipCard(flashCard.id)">
               <div id="{{flashCard.id}}-fci" class="flip-card-inner">
@@ -72,77 +72,41 @@ export class FlashcardsComponent {
   headerDate: string = this.dateService.getDateString();
   flashCards: any = FLASH_CARDS;
   nextCardId: number = 1;
+  scrollTimeout: any;
 
-  // TODO: code to check if card is on screen, use scroll event handler to update currentcardid
-  // ngAfterViewInit() {
-  //   // const t = $( "#fs1" )
-  //   // const t = document.getElementById('fs1')
-  //   // console.log(t);
-
-  //   if(this.isOnScreen($('#fs2'))) {
-  //     console.log('t');
-  //   }
-  // }
-
-  // isOnScreen(element: any)
-  // {
-  //     var curPos = element.offset();
-  //     console.log(curPos);
-  //     var curTop = curPos.top;
-  //     var screenHeight = $(window).height();
-  //     var screenWidth = $(window).width();
-  //     console.log(screenHeight, screenWidth);
-  //     return (curTop > screenHeight) ? false : true;
-  // }
-
-  // ngOnInit() {
-  //   console.log('t');
-  // }
+  ngOnInit() {
+    //TODO: on load check url and change current card to card in url
+  }
 
   isOnScreen(element: any): boolean {
       var curPos = element.offset();
-      console.log(curPos);
-      var curTop = curPos.top;
-      var screenHeight = $(window).height();
-      var screenWidth = $(window).width();
-      console.log(screenHeight, screenWidth);
-      return (curTop > screenHeight) ? false : true;
+
+      var slideContainer = $('.slider').offset();
+
+      if (curPos.left == slideContainer.left) return true;
+      else return false;
   }
 
-  handleScroll($event) {
-    // this.flashCards.forEach(x => {
-    //   console.log(x);
-    // });
+  handleScroll() {
+    if (this.scrollTimeout != null) clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => {
+      this.syncFlashCardId();
+    }, 500);
+  }
 
-    console.log($event);
-
-    // var scrollTimeout = null;
-    // var scrollendDelay = 500; // ms
-
-    // $(window).scroll(function() {
-    //     if ( scrollTimeout === null ) {
-    //         scrollbeginHandler();
-    //     } else {
-    //         clearTimeout( scrollTimeout );
-    //     }
-    //     scrollTimeout = setTimeout( scrollendHandler, scrollendDelay );
-    // });
-
-    // function scrollbeginHandler() {
-    //     // this code executes on "scrollbegin"
-    //     document.body.style.backgroundColor = "yellow";
-    // }
-
-    // function scrollendHandler() {
-    //     // this code executes on "scrollend"
-    //     document.body.style.backgroundColor = "gray";
-    //     scrollTimeout = null;
-    // }
+  syncFlashCardId() {
+    this.flashCards.forEach(x => {
+      const elem = $('#' + x.id);
+      if (this.isOnScreen(elem)) {
+        this.nextCardId = parseInt(x.id.substring(2));
+        this.router.navigate(['/flashcards'], {fragment: x.id});
+        return;
+      }
+    });
   }
 
   flipCard(cardId: string) {
     const cardToFlip = document.getElementById(cardId + '-fci');
-    console.log(cardToFlip);
     cardToFlip.classList.toggle('flipped');
   }
 
