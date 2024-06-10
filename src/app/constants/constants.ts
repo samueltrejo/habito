@@ -1,5 +1,46 @@
 import { Task } from "../models/task";
 
+export const FLASH_CARDS = [
+  { id: "fs1", front: "Baby", back: "Bebé" },
+  { id: "fs2", front: "Newborn", back: "Recién nacido" },
+  { id: "fs3", front: "Infant", back: "Niño pequeño" },
+  { id: "fs4", front: "Toddler", back: "Niño pequeño" },
+  { id: "fs5", front: "Crib", back: "Cuna" },
+  { id: "fs6", front: "Stroller", back: "Carreola" },
+  { id: "fs7", front: "Bottle", back: "Biberón o Botella" },
+  { id: "fs8", front: "Pacifier", back: "Chupete o Chupon" },
+  { id: "fs9", front: "Diaper", back: "Pañal" },
+  { id: "fs10", front: "Onesie", back: "Mameluco" },
+  { id: "fs11", front: "Lullaby", back: "Canción de cuna" },
+  { id: "fs12", front: "Nurse", back: "Enfermera" },
+  { id: "fs13", front: "Swaddle", back: "Envolver" },
+  { id: "fs14", front: "Rattle", back: "Sonajero" },
+  { id: "fs15", front: "Formula", back: "Fórmula" },
+  { id: "fs16", front: "Highchair", back: "Silla de bebé" },
+  { id: "fs17", front: "Blanket", back: "Cobijita" },
+  { id: "fs18", front: "Playpen", back: "Corralito" },
+  { id: "fs19", front: "Teething", back: "Dentición" },
+  { id: "fs20", front: "Burp", back: "Eructar" },
+  { id: "fs21", front: "Bib", back: "Babero" },
+  { id: "fs22", front: "Cuddle", back: "Abrazo" },
+  { id: "fs23", front: "Nursery", back: "Guardería" },
+  { id: "fs24", front: "Car seat", back: "Asiento de coche" },
+  { id: "fs25", front: "Wean", back: "Destetar" },
+  { id: "fs26", front: "Pediatrician", back: "Pediatra" },
+  { id: "fs27", front: "Growth spurt", back: "Estirón" },
+  { id: "fs28", front: "Colic", back: "Cólico" },
+  { id: "fs29", front: "Tummy time", back: "Tiempo de barriga" },
+  { id: "fs30", front: "Sippy cup", back: "Vaso de aprendizaje" },
+  { id: "fs31", front: "Teether", back: "Mordedor" },
+  { id: "fs32", front: "Walker", back: "Andador" },
+  { id: "fs33", front: "Mobility", back: "Movilidad" },
+  { id: "fs34", front: "Crawl", back: "Gatear" },
+  { id: "fs35", front: "Nap", back: "Siesta" },
+  { id: "fs36", front: "Feeding", back: "Alimentando" },
+  { id: "fs37", front: "Binky", back: "Chupete" },
+  { id: "fs38", front: "Rocking chair", back: "Mecedora" }
+];
+
 export const DAYS_OF_WEEK = [
   {abbreviation: 'Sun', fullName: 'Sunday'},
   {abbreviation: 'Mon', fullName: 'Monday'},
@@ -88,6 +129,16 @@ export const TASK_COMPLETIONS = [
     id: 'taskcomp14',
     date: '20240601',
     taskid: 'dyAQZ5d3Gh13PQrMdIrY'
+  },
+  {
+    id: 'taskcomp14',
+    date: '20240604',
+    taskid: 'dyAQZ5d3Gh13PQrMdIrY'
+  },
+  {
+    id: 'taskcomp14',
+    date: '20240630',
+    taskid: '3JNaK6JALRlueycVwCKH'
   },
 ]
 

@@ -19,3 +19,7 @@ npx cap copy
 
 /**run this after making native functionality changes**/
 npx cap sync
+
+
+/**run this to create logo & splash pwa manifest files**/
+npx capacitor-assets generate 
