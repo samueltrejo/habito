@@ -21,6 +21,10 @@ export class DateService {
     return this.headerDateString;
   }
 
+  public getToday() {
+    return this.dateObject.getDate();
+  }
+
   private setMonthObject() {
     this.monthObject = {
       number: this.dateObject.getMonth(),

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaskGroup } from 'src/app/models/taskgroup';
+import { DateService } from 'src/app/services/date.service';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -29,22 +30,20 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent {
-  taskGroups: TaskGroup[];
   taskService: TaskService = inject(TaskService);
+  dateService: DateService = inject(DateService);
+  taskGroups: TaskGroup[];
   router: Router = inject(Router);
   subscription: any;
+  headerDate: string;
 
   ngOnInit() {
-    // this.taskGroups = this.taskService.getAllTaskGroups();
-    // this.subscription = this.taskService.taskGroups$.subscribe(data => {
-    //   this.taskGroups = data;
-    // });
-    // this.taskGroups = this.taskService.monthDays[0].taskGroups;
+    const date = this.dateService.getToday() - 1;
     if (this.taskService.monthDays) {
       this.taskGroups = this.taskService.monthDays[0].taskGroups;
     }
     this.subscription = this.taskService.monthDays$.subscribe(data => {
-      console.log(data);
+      console.log(data[date]);
       this.taskGroups = data[0].taskGroups;
     });
   }

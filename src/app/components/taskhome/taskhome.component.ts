@@ -60,9 +60,16 @@ export class TaskhomeComponent {
       this.category = event.url.slice(1);
     });
 
-    this.taskGroups = this.taskService.getAllTaskGroups();
-    this.taskGroupSub = this.taskService.taskGroups$.subscribe(data => {
-      this.taskGroups = data;
+    // this.taskGroups = this.taskService.getAllTaskGroups();
+    // this.taskGroupSub = this.taskService.taskGroups$.subscribe(data => {
+    //   this.taskGroups = data;
+    // });
+    if (this.taskService.monthDays) {
+      this.taskGroups = this.taskService.monthDays[0].taskGroups;
+    }
+    this.taskService.monthDays$.subscribe(data => {
+      console.log(data);
+      this.taskGroups = data[0].taskGroups;
     });
   }
 

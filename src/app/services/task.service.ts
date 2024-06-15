@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { DAYS_OF_WEEK, TASKS, TASK_COMPLETIONS } from '../constants/constants'
+import { DAYS_OF_WEEK, TASK_COMPLETIONS } from '../constants/constants'
 
 import { Task } from '../models/task';
 import { TaskGroup } from '../models/taskgroup';
@@ -57,7 +57,7 @@ export class TaskService {
     });
   }
 
-  private getTasksObservable(): void {
+  private getTasksObservable(): void {//TODO: rename better
     this.taskGroupsListenerUnsub = onSnapshot(collection(this.firestore, 'tasks'), (result) => {
       const tasks: Task[] = result.docs.map(taskData => {
         const task: Task = taskData.data() as Task;
