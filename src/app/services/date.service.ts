@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DateService {
-  private dateObject: Date = new Date();
+  private dateService: Date = new Date();
   private headerDateString: string;
   private monthObject: any;
 
@@ -22,21 +22,26 @@ export class DateService {
   }
 
   public getToday() {
-    return this.dateObject.getDate();
+    return this.dateService.getDate();
   }
 
   private setMonthObject() {
+    const dateDto = {
+      numberDateInt: 0,
+      numberDateString: '',
+    }
+
     this.monthObject = {
-      number: this.dateObject.getMonth(),
-      twoDigitString: ('0' + (this.dateObject.getMonth() + 1)).slice(-2),
-      name: this.dateObject.toLocaleDateString(undefined, { month: 'long' }),
-      year: this.dateObject.getFullYear(),
-      daysInMonth: new Date(this.dateObject.getFullYear(), this.dateObject.getMonth() + 1, 0).getDate(),
-      dayOffset: new Date(this.dateObject.getFullYear(), this.dateObject.getMonth(), 1).getDay(),
+      number: this.dateService.getMonth(),
+      twoDigitString: ('0' + (this.dateService.getMonth() + 1)).slice(-2),
+      name: this.dateService.toLocaleDateString(undefined, { month: 'long' }),
+      year: this.dateService.getFullYear(),
+      daysInMonth: new Date(this.dateService.getFullYear(), this.dateService.getMonth() + 1, 0).getDate(),
+      dayOffset: new Date(this.dateService.getFullYear(), this.dateService.getMonth(), 1).getDay(),
     }
   }
 
   private setHeaderDateString() {
-    this.headerDateString = this.dateObject.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+    this.headerDateString = this.dateService.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
   }
 }
