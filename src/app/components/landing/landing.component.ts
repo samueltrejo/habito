@@ -38,13 +38,14 @@ export class LandingComponent {
   headerDate: string;
 
   ngOnInit() {
-    const date = this.dateService.getToday() - 1;
+    const dateObj = this.dateService.getDateObject();
+    console.log(dateObj.monthNumString);
     if (this.taskService.monthDays) {
-      this.taskGroups = this.taskService.monthDays[0].taskGroups;
+      this.taskGroups = this.taskService.monthDays[dateObj.dayNumInt].taskGroups;
     }
     this.subscription = this.taskService.monthDays$.subscribe(data => {
-      console.log(data[date]);
-      this.taskGroups = data[date].taskGroups;
+      console.log(data[dateObj.dayNumInt - 1]);
+      this.taskGroups = data[dateObj.dayNumInt - 1].taskGroups;
     });
   }
 

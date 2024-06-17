@@ -57,7 +57,7 @@ export class TaskService {
     });
   }
 
-  private getTasksObservable(): void {//TODO: rename better
+  private getTasksObservable(): void {//TODO: rename to getTasksFromDb
     this.taskGroupsListenerUnsub = onSnapshot(collection(this.firestore, 'tasks'), (result) => {
       const tasks: Task[] = result.docs.map(taskData => {
         const task: Task = taskData.data() as Task;
@@ -86,21 +86,13 @@ export class TaskService {
   }
 
   private setMonthDayTasks(taskGroups: TaskGroup[]): void {
-    const monthObj = this.dateService.getMonthObject();
-    // number
-    // twoDigitString
-    // name
-    // year
-    // daysInMonth
-    // dayOffset
-
-    
+    const monthObj = this.dateService.getDateObject();
     const monthDays = Array.from({length: monthObj.daysInMonth}, (_, i) => {
       const dayNum = i + 1;
       const monthDay: any = { date: dayNum, day: DAYS_OF_WEEK[(i + monthObj.dayOffset) % 7] }
       
       const taskGroupsClone: TaskGroup[] = JSON.parse(JSON.stringify(taskGroups));
-      const dateId = `${monthObj.year}${monthObj.twoDigitString}${('0' + dayNum).slice(-2)}`
+      const dateId = `${monthObj.yearInt}${monthObj.monthNumString}${('0' + dayNum).slice(-2)}`
 
       monthDay.taskGroups = taskGroupsClone.map(taskGroup => {
         taskGroup.tasks = taskGroup.tasks.map(task => {
