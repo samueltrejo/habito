@@ -44,7 +44,7 @@ export class LandingComponent {
     }
     this.subscription = this.taskService.monthDays$.subscribe(data => {
       console.log(data[date]);
-      this.taskGroups = data[0].taskGroups;
+      this.taskGroups = data[date].taskGroups;
     });
   }
 
