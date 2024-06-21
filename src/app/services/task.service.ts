@@ -45,6 +45,10 @@ export class TaskService {
     await deleteDoc(docRef);
   }
 
+  public async saveTaskCompletion(taskCompletion: any): Promise<void> {
+    const docRef = await addDoc(collection(this.firestore, 'taskcompletions'), taskCompletion);
+  }
+
   private setTaskGroupsObservable(): void {
     this.taskGroups$.subscribe(x => {
       this.taskGroups = x;
@@ -80,8 +84,6 @@ export class TaskService {
       }
       group.tasks.push(tasks[i]);
     }
-    // return groups;
-    // this.taskGroups$.next(groups);
     return groups;
   }
 
@@ -96,7 +98,11 @@ export class TaskService {
 
       monthDay.taskGroups = taskGroupsClone.map(taskGroup => {
         taskGroup.tasks = taskGroup.tasks.map(task => {
-          task.isComplete = !!TASK_COMPLETIONS.find(x => x.date == dateId && x.taskid == task.id);
+          // task.isComplete = !!TASK_COMPLETIONS.find(x => x.date == dateId && x.taskid == task.id);
+          const taskCompletion = TASK_COMPLETIONS.find(x => x.date == dateId && x.taskid == task.id);
+          if (taskCompletion) {
+            task.isComplete = true;
+          }
           return task;
         });
         return taskGroup;

@@ -25,4 +25,9 @@ export class DateService {
     const dateString = this.dateService.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
     return dateString;
   }
+
+  public getTodayId() {
+    const todayId = this.dateService.getFullYear().toString() + ('0' + (this.dateService.getMonth() + 1)).slice(-2) + ('0' + (this.dateService.getDate())).slice(-2);
+    return todayId;
+  }
 }

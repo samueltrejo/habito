@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { TaskGroup } from 'src/app/models/taskgroup';
+import { DateService } from 'src/app/services/date.service';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -42,9 +43,11 @@ import { TaskService } from 'src/app/services/task.service';
 export class TaskhomeComponent {
   taskGroups: TaskGroup[];
   taskService: TaskService = inject(TaskService);
+  dateService: DateService = inject(DateService);
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
   category: string;
+  subscription: any;
 
   urlSub: any;
   taskGroupSub: any;
@@ -60,16 +63,14 @@ export class TaskhomeComponent {
       this.category = event.url.slice(1);
     });
 
-    // this.taskGroups = this.taskService.getAllTaskGroups();
-    // this.taskGroupSub = this.taskService.taskGroups$.subscribe(data => {
-    //   this.taskGroups = data;
-    // });
+    const dateObj = this.dateService.getDateObject();
+    console.log(dateObj.monthNumString);
     if (this.taskService.monthDays) {
-      this.taskGroups = this.taskService.monthDays[0].taskGroups;
+      this.taskGroups = this.taskService.monthDays[dateObj.dayNumInt].taskGroups;
     }
-    this.taskService.monthDays$.subscribe(data => {
-      console.log(data);
-      this.taskGroups = data[0].taskGroups;
+    this.subscription = this.taskService.monthDays$.subscribe(data => {
+      console.log(data[dateObj.dayNumInt - 1]);
+      this.taskGroups = data[dateObj.dayNumInt - 1].taskGroups;
     });
   }
 
@@ -78,7 +79,7 @@ export class TaskhomeComponent {
 
   ngOnDestroy() {
     this.urlSub.unsubscribe();
-    this.taskGroupSub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   setCategory(taskcategory: string): void {

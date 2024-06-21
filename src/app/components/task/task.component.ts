@@ -1,6 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Task } from 'src/app/models/task';
+import { DateService } from 'src/app/services/date.service';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -28,6 +29,7 @@ export class TaskComponent {
 
   fb: FormBuilder = inject(FormBuilder);
   taskService: TaskService = inject(TaskService);
+  dateService: DateService = inject(DateService);
   
   taskForm: FormGroup;
 
@@ -38,8 +40,13 @@ export class TaskComponent {
   }
 
   updateTaskStatus($event: any) {
-    this.task.isComplete = this.taskForm.get('isComplete')?.value;
-    this.taskService.updateTask(this.task);    
+    const newTaskCompletion = {
+      date: this.dateService.getTodayId(),
+      taskId: this.task.id
+    }
+    this.taskService.saveTaskCompletion(newTaskCompletion);
+    // this.task.isComplete = this.taskForm.get('isComplete')?.value;
+    // this.taskService.updateTask(this.task);    
   }
 
   deleteTask($event: any) {
