@@ -7,13 +7,14 @@ import { TaskService } from 'src/app/services/task.service';
 @Component({
   selector: 'app-landing',
   template: `
-  <div class="py-3 bg-stdark text-light">
+  <!-- <div class="py-3 bg-stdark text-light">
     <div class="container">
       <h3>Overview</h3>
       <div>{{getDate()}}</div>
     </div>
-  </div>
-  <div class="container">
+  </div> -->
+
+  <!-- <div class="container">
     <div class="d-flex flex-wrap justify-content-center mt-5">
       <div *ngFor="let taskGroup of taskGroups" class="card border-dark m-3 w-100">
         <div class="card-body bg-stdark text-light" style="cursor: pointer;" (click)="goToCategory(taskGroup.category)">
@@ -25,8 +26,11 @@ import { TaskService } from 'src/app/services/task.service';
         </div>
       </div>
     </div>
-  </div>
-    <!-- <app-overview></app-overview> -->
+  </div> -->
+  
+  <!-- <app-overview></app-overview> -->
+
+  <app-dayselect></app-dayselect>
   `,
   styleUrls: ['./landing.component.scss']
 })

@@ -18,6 +18,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { TrackerComponent } from './components/tracker/tracker.component';
 import { FlashcardsComponent } from './components/flashcards/flashcards.component';
 import { OverviewComponent } from './components/overview/overview.component';
+import { DayselectComponent } from './components/dayselect/dayselect.component';
 const firebaseConfig = {
   apiKey: "AIzaSyACgyBP2ZjnEPYZDXmPQmCCTTjPkJLSq7o",
   authDomain: "majestad-df1a6.firebaseapp.com",
@@ -40,7 +41,8 @@ const firebaseConfig = {
     NavigationComponent,
     TrackerComponent,
     FlashcardsComponent,
-    OverviewComponent
+    OverviewComponent,
+    DayselectComponent
   ],
   imports: [
     BrowserModule,
