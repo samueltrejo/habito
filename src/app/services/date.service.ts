@@ -7,6 +7,10 @@ import { DateObject } from '../models/dateobject';
 export class DateService {
   private dateService: Date = new Date();
 
+  constructor() {
+    console.log('t');
+  }
+
   public getDateObject(): DateObject {
     const dateObj = {
       dayNumInt: this.dateService.getDate(),
