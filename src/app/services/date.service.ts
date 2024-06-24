@@ -9,7 +9,7 @@ export class DateService {
   private dateService: Date = new Date();
 
   constructor() {
-    console.log('t');
+    // console.log(this.getDaySelectCards());
   }
 
   public getDateObject(): DateObject {
@@ -42,5 +42,6 @@ export class DateService {
       const dayCard: any = { date: i + 1, day: DAYS_OF_WEEK[(i + dateObj.dayOffset) % 7] }
       return dayCard;
     });
+    return daySelectCards;
   }
 }
