@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DateObject } from '../models/dateobject';
+import { DAYS_OF_WEEK } from '../constants/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,13 @@ export class DateService {
   public getTodayId() {
     const todayId = this.dateService.getFullYear().toString() + ('0' + (this.dateService.getMonth() + 1)).slice(-2) + ('0' + (this.dateService.getDate())).slice(-2);
     return todayId;
+  }
+
+  public getDaySelectCards() {
+    const dateObj = this.getDateObject();
+    const daySelectCards = Array.from({length: dateObj.daysInMonth}, (_, i) => {
+      const dayCard: any = { date: i + 1, day: DAYS_OF_WEEK[(i + dateObj.dayOffset) % 7] }
+      return dayCard;
+    });
   }
 }
