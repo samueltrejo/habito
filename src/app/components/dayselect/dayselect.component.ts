@@ -7,7 +7,6 @@ import { DateService } from 'src/app/services/date.service';
   template: `
     <div class="container mt-5">
       <div class="d-flex">
-
         <div *ngFor="let dayCard of daySelectCards" class="day-card">
           <div>{{dayCard.day.abbreviation}}</div>
           <div>{{dayCard.date}}</div>
@@ -23,7 +22,6 @@ export class DayselectComponent {
 
   ngOnInit() {
     const daySelectCards = this.dateService.getDaySelectCards();
-    console.log(daySelectCards);
     this.daySelectCards = daySelectCards;
   }
 }
