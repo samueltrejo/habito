@@ -9,7 +9,7 @@ import { DateService } from 'src/app/services/date.service';
       <div class="d-flex">
         <div *ngFor="let dayCard of daySelectCards" class="day-card">
           <div>{{dayCard.day.abbreviation}}</div>
-          <div>{{dayCard.date}}</div>
+          <div>{{('0' + (dayCard.date)).slice(-2)}}</div>
         </div>
       </div>
     </div>
